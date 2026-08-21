@@ -1,0 +1,283 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>People Pulse · Executive work intelligence</title>
+  <style>
+    :root { color-scheme: light dark; }
+    .viz-root {
+      color-scheme: light;
+      --page:#f9f9f7; --surface-1:#fcfcfb; --surface-2:#f2f2ee;
+      --text-primary:#0b0b0b; --text-secondary:#52514e; --text-muted:#898781;
+      --grid:#e1e0d9; --baseline:#c3c2b7; --border:rgba(11,11,11,.10);
+      --series-1:#2a78d6; --series-2:#eb6834; --series-3:#1baf7a;
+      --good:#0ca30c; --good-text:#006300; --warning:#fab219; --serious:#ec835a;
+      --accent-wash:rgba(42,120,214,.08); --shadow:0 18px 54px rgba(22,22,18,.11);
+    }
+    :root[data-theme="dark"] .viz-root {
+      color-scheme:dark; --page:#0d0d0d; --surface-1:#1a1a19; --surface-2:#222220;
+      --text-primary:#fff; --text-secondary:#c3c2b7; --text-muted:#898781;
+      --grid:#2c2c2a; --baseline:#383835; --border:rgba(255,255,255,.10);
+      --series-1:#3987e5; --series-2:#d95926; --series-3:#199e70;
+      --good:#0ca30c; --good-text:#6fd46f; --warning:#fab219; --serious:#ec835a;
+      --accent-wash:rgba(57,135,229,.14); --shadow:0 18px 54px rgba(0,0,0,.32);
+    }
+    @media (prefers-color-scheme:dark) {
+      :root:not([data-theme="light"]) .viz-root {
+        color-scheme:dark; --page:#0d0d0d; --surface-1:#1a1a19; --surface-2:#222220;
+        --text-primary:#fff; --text-secondary:#c3c2b7; --text-muted:#898781;
+        --grid:#2c2c2a; --baseline:#383835; --border:rgba(255,255,255,.10);
+        --series-1:#3987e5; --series-2:#d95926; --series-3:#199e70;
+        --good:#0ca30c; --good-text:#6fd46f; --warning:#fab219; --serious:#ec835a;
+        --accent-wash:rgba(57,135,229,.14); --shadow:0 18px 54px rgba(0,0,0,.32);
+      }
+    }
+    * { box-sizing:border-box; }
+    html { background:#0d0d0d; }
+    body { margin:0; font-family:Inter,ui-sans-serif,system-ui,-apple-system,"Segoe UI",sans-serif; }
+    button,select,input,textarea { font:inherit; }
+    button,a,select { -webkit-tap-highlight-color:transparent; }
+    button:focus-visible,a:focus-visible,select:focus-visible,textarea:focus-visible,input:focus-visible { outline:3px solid color-mix(in srgb,var(--series-1) 42%,transparent); outline-offset:2px; }
+    .viz-root { min-height:100vh; background:var(--page); color:var(--text-primary); }
+    .shell { display:grid; grid-template-columns:224px minmax(0,1fr); min-height:100vh; }
+    .sidebar { position:sticky; top:0; align-self:start; height:100vh; padding:24px 18px 18px; border-right:1px solid var(--grid); background:color-mix(in srgb,var(--surface-1) 96%,transparent); display:flex; flex-direction:column; z-index:5; }
+    .brand { display:flex; align-items:center; gap:10px; color:var(--text-primary); text-decoration:none; }
+    .brand-mark { width:29px; height:29px; border-radius:8px; background:var(--text-primary); color:var(--page); display:grid; place-items:center; font-weight:800; letter-spacing:-.08em; }
+    .brand-copy { font-size:15px; font-weight:760; letter-spacing:-.02em; }
+    .brand-copy small { display:block; color:var(--text-muted); font-size:10px; font-weight:600; letter-spacing:.06em; text-transform:uppercase; margin-top:2px; }
+    .side-label { margin:29px 9px 9px; color:var(--text-muted); font-size:10px; font-weight:750; letter-spacing:.09em; text-transform:uppercase; }
+    .side-nav { display:grid; gap:3px; }
+    .side-nav a { color:var(--text-secondary); text-decoration:none; font-size:12.5px; padding:8px 9px; border-radius:7px; }
+    .side-nav a:hover,.side-nav a.active { color:var(--text-primary); background:var(--accent-wash); }
+    .scope-note { margin-top:auto; padding:12px 10px 0; border-top:1px solid var(--grid); color:var(--text-muted); font-size:10.5px; line-height:1.55; }
+    .mode-stack { display:flex; flex-wrap:wrap; gap:5px; margin-bottom:8px; }
+    .mode { border:1px solid var(--border); border-radius:5px; padding:2px 5px; color:var(--text-secondary); background:var(--surface-2); font:700 9px/1.4 ui-monospace,SFMono-Regular,Consolas,monospace; }
+    .main { min-width:0; padding:0 clamp(18px,3.2vw,48px) 60px; }
+    .topbar { height:68px; display:flex; align-items:center; gap:10px; border-bottom:1px solid var(--grid); position:sticky; top:0; background:color-mix(in srgb,var(--page) 92%,transparent); backdrop-filter:blur(14px); z-index:4; }
+    .mobile-brand { display:none; }
+    .context { min-width:0; }
+    .context strong { display:block; font-size:12px; }
+    .context span { color:var(--text-muted); font-size:10.5px; }
+    .top-spacer { flex:1; }
+    .select,.icon-btn,.ask-top { min-height:34px; border:1px solid var(--border); border-radius:7px; background:var(--surface-1); color:var(--text-primary); font-size:11.5px; }
+    .select { padding:0 30px 0 10px; }
+    .icon-btn { min-width:36px; cursor:pointer; }
+    .ask-top { padding:0 12px; cursor:pointer; font-weight:700; background:var(--text-primary); color:var(--page); border-color:var(--text-primary); }
+    .status-strip { min-height:34px; display:flex; align-items:center; gap:8px; border-bottom:1px solid var(--grid); color:var(--text-muted); font-size:10.5px; }
+    .status-dot { width:6px; height:6px; border-radius:50%; background:var(--good); box-shadow:0 0 0 3px color-mix(in srgb,var(--good) 12%,transparent); }
+    .status-strip.stale .status-dot,.status-strip.partial .status-dot { background:var(--warning); }
+    .intro { padding:30px 0 22px; display:grid; grid-template-columns:minmax(0,1fr) auto; align-items:end; gap:28px; }
+    .eyebrow { color:var(--series-1); font-size:10px; font-weight:800; letter-spacing:.12em; text-transform:uppercase; margin:0 0 8px; }
+    h1 { font-size:clamp(28px,4vw,48px); line-height:1.02; letter-spacing:-.045em; margin:0; max-width:780px; font-weight:720; }
+    .intro-copy { color:var(--text-secondary); font-size:12.5px; line-height:1.55; max-width:720px; margin:13px 0 0; }
+    .summary-facts { display:flex; gap:22px; padding-bottom:4px; }
+    .summary-fact { min-width:78px; }
+    .summary-fact b { font-size:23px; letter-spacing:-.04em; display:block; }
+    .summary-fact span { color:var(--text-muted); font-size:10px; line-height:1.25; display:block; max-width:82px; }
+    .filters { display:flex; gap:6px; overflow:auto; padding:0 0 17px; scrollbar-width:none; }
+    .filter { white-space:nowrap; border:1px solid var(--border); background:transparent; color:var(--text-secondary); border-radius:999px; padding:6px 10px; font-size:10.5px; cursor:pointer; }
+    .filter.active { background:var(--text-primary); color:var(--page); border-color:var(--text-primary); }
+    .workspace { display:grid; grid-template-columns:minmax(0,1fr) 350px; gap:26px; align-items:start; }
+    .content-flow { min-width:0; display:grid; gap:31px; }
+    .section { min-width:0; scroll-margin-top:104px; }
+    .section-head { display:flex; align-items:flex-end; justify-content:space-between; gap:16px; padding-bottom:10px; border-bottom:1px solid var(--text-primary); }
+    .section-head h2 { margin:0; font-size:14px; letter-spacing:-.01em; }
+    .section-head p { margin:0; color:var(--text-muted); font-size:10.5px; }
+    .attention-list { display:grid; }
+    .signal-row { appearance:none; width:100%; display:grid; grid-template-columns:74px minmax(0,1fr) 118px 22px; gap:14px; align-items:center; text-align:left; padding:15px 3px; border:0; border-bottom:1px solid var(--grid); background:transparent; color:inherit; cursor:pointer; transition:background .16s ease,padding .16s ease; }
+    .signal-row:hover { background:var(--accent-wash); padding-left:8px; padding-right:8px; }
+    .delay-0 { animation-delay:0ms!important; } .delay-1 { animation-delay:30ms!important; } .delay-2 { animation-delay:60ms!important; }
+    .delay-3 { animation-delay:90ms!important; } .delay-4 { animation-delay:120ms!important; } .delay-5 { animation-delay:150ms!important; }
+    .delay-6 { animation-delay:180ms!important; } .delay-7 { animation-delay:210ms!important; } .delay-8 { animation-delay:240ms!important; }
+    .urgency { display:inline-flex; align-items:center; gap:6px; color:var(--text-secondary); font-size:9px; font-weight:800; letter-spacing:.05em; text-transform:uppercase; }
+    .urgency::before { content:""; width:7px; height:7px; border-radius:2px; background:var(--baseline); }
+    .urgency.today::before { background:var(--series-2); }
+    .urgency.this-week::before { background:var(--warning); }
+    .signal-main { min-width:0; }
+    .signal-main strong { display:block; font-size:12.5px; line-height:1.35; }
+    .signal-main span { display:block; color:var(--text-secondary); font-size:10.5px; line-height:1.45; margin-top:4px; overflow:hidden; text-overflow:ellipsis; white-space:nowrap; }
+    .signal-meta { color:var(--text-muted); font-size:9.5px; text-align:right; line-height:1.45; }
+    .signal-meta b { display:block; color:var(--text-secondary); font-weight:650; }
+    .state-label { color:var(--good-text)!important; }
+    .arrow { color:var(--text-muted); font-size:17px; }
+    .table-wrap { overflow:auto; }
+    table { width:100%; border-collapse:collapse; min-width:680px; }
+    th { color:var(--text-muted); text-transform:uppercase; letter-spacing:.06em; font-size:8.5px; text-align:left; padding:9px 8px; border-bottom:1px solid var(--grid); }
+    td { padding:12px 8px; border-bottom:1px solid var(--grid); font-size:10.5px; color:var(--text-secondary); vertical-align:top; }
+    td:first-child { color:var(--text-primary); font-weight:700; font-size:11.5px; }
+    .activity-label { display:inline-flex; align-items:center; gap:5px; }
+    .activity-label::before { content:""; width:5px; height:5px; border-radius:50%; background:var(--series-3); }
+    .capacity-list { display:grid; }
+    .capacity-item { padding:15px 0; border-bottom:1px solid var(--grid); }
+    .capacity-item:last-child { border-bottom:0; }
+    .capacity-top { display:flex; align-items:start; justify-content:space-between; gap:14px; }
+    .capacity-top strong { font-size:12.5px; }
+    .capacity-count { color:var(--series-2); font:700 10px ui-monospace,SFMono-Regular,Consolas,monospace; white-space:nowrap; }
+    .capacity-item p { color:var(--text-secondary); font-size:10.5px; line-height:1.55; margin:7px 0 0; }
+    .ladder { display:flex; flex-wrap:wrap; gap:4px; margin-top:9px; counter-reset:rung; }
+    .ladder span { counter-increment:rung; border:1px solid var(--border); padding:3px 6px; font-size:8.5px; color:var(--text-muted); border-radius:4px; }
+    .ladder span::before { content:counter(rung) ". "; color:var(--series-1); font-weight:800; }
+    .split { display:grid; grid-template-columns:1fr 1fr; gap:24px; }
+    .moment-row { display:grid; grid-template-columns:30px minmax(0,1fr) auto; gap:10px; align-items:center; padding:11px 0; border-bottom:1px solid var(--grid); }
+    .avatar { width:28px; height:28px; border-radius:50%; display:grid; place-items:center; background:var(--text-primary); color:var(--page); font-size:9px; font-weight:800; }
+    .moment-copy strong { font-size:10.5px; display:block; }
+    .moment-copy span { color:var(--text-muted); font-size:9.5px; }
+    .text-link { color:var(--series-1); text-decoration:none; font-size:9.5px; font-weight:700; }
+    .chart { padding-top:12px; min-height:192px; }
+    .legend { display:flex; flex-wrap:wrap; gap:10px; color:var(--text-muted); font-size:9px; margin-bottom:4px; }
+    .legend span { display:inline-flex; align-items:center; gap:5px; }
+    .legend i { width:8px; height:3px; border-radius:3px; display:inline-block; }
+    .series-color-0 { background:var(--series-1); } .series-color-1 { background:var(--series-2); } .series-color-2 { background:var(--series-3); }
+    .chart svg { width:100%; height:156px; overflow:visible; }
+    .chat-panel { position:sticky; top:93px; border-left:1px solid var(--grid); padding-left:24px; min-width:0; }
+    .chat-head { display:flex; justify-content:space-between; align-items:start; gap:10px; }
+    .chat-head h2 { margin:0; font-size:15px; letter-spacing:-.02em; }
+    .chat-head span { color:var(--text-muted); font-size:9px; }
+    .chat-scope { color:var(--text-secondary); font-size:10px; line-height:1.5; margin:8px 0 13px; }
+    .suggestions { display:grid; gap:5px; }
+    .suggestion { text-align:left; border:1px solid var(--border); border-radius:7px; background:transparent; color:var(--text-secondary); padding:7px 8px; font-size:9.5px; cursor:pointer; }
+    .suggestion:hover { border-color:var(--series-1); color:var(--text-primary); }
+    .chat-thread { display:grid; gap:9px; max-height:440px; overflow:auto; padding:2px 2px 3px; scrollbar-width:thin; }
+    .chat-empty { border-left:2px solid var(--series-1); background:var(--accent-wash); color:var(--text-secondary); padding:9px 10px; font-size:9.5px; line-height:1.5; }
+    .chat-turn { display:grid; gap:5px; }
+    .chat-question { justify-self:end; max-width:92%; background:var(--text-primary); color:var(--page); border-radius:9px 9px 2px 9px; padding:8px 9px; font-size:9.5px; line-height:1.45; }
+    .chat-answer { border:1px solid var(--border); border-radius:2px 9px 9px 9px; background:var(--surface-1); padding:9px; }
+    .chat-answer.refused { border-left:3px solid var(--series-2); }
+    .chat-answer.insufficient-evidence { border-left:3px solid var(--warning); }
+    .chat-answer p { color:var(--text-secondary); font-size:9.5px; line-height:1.55; margin:0; white-space:pre-wrap; }
+    .chat-meta { display:flex; flex-wrap:wrap; gap:7px; color:var(--text-muted); font-size:8px; margin-bottom:6px; text-transform:uppercase; letter-spacing:.05em; }
+    .chat-citations { display:grid; gap:4px; margin-top:8px; }
+    .chat-citation { display:block; color:var(--text-primary); text-decoration:none; border-left:2px solid var(--series-1); padding:5px 7px; background:var(--accent-wash); font-size:8.5px; line-height:1.35; }
+    .chat-citation small { display:block; color:var(--text-muted); margin-top:2px; }
+    .chat-limitations { color:var(--text-muted); font-size:8.5px; line-height:1.45; margin:7px 0 0; padding-top:7px; border-top:1px solid var(--grid); }
+    .chat-loading { color:var(--text-muted); font-size:9.5px; padding:8px 0; }
+    .chat-form { display:grid; gap:6px; margin-top:12px; }
+    .chat-form textarea { resize:none; min-height:84px; max-height:150px; border:1px solid var(--border); border-radius:8px; background:var(--surface-1); color:var(--text-primary); padding:9px; font-size:10.5px; line-height:1.4; }
+    .ask-chat { min-height:34px; border:0; border-radius:7px; background:var(--series-1); color:#fff; padding:0 10px; font-size:10px; font-weight:800; cursor:pointer; }
+    .ask-chat:disabled { opacity:.45; cursor:wait; }
+    .boundary-note { border-top:1px solid var(--grid); color:var(--text-muted); font-size:9px; line-height:1.5; margin:14px 0 0; padding-top:10px; }
+    .footer { margin:40px 0 0; padding:16px 0; border-top:1px solid var(--grid); display:flex; justify-content:space-between; gap:20px; color:var(--text-muted); font-size:9.5px; line-height:1.5; }
+    .state { padding:60px 18px; text-align:center; border:1px dashed var(--border); color:var(--text-secondary); }
+    .state h2 { color:var(--text-primary); font-size:16px; margin:0 0 7px; }
+    .state p { font-size:10.5px; margin:0 auto 13px; max-width:460px; line-height:1.5; }
+    .inline-empty { color:var(--text-muted); font-size:10.5px; padding:17px 2px; margin:0; border-bottom:1px solid var(--grid); }
+    .retry { border:1px solid var(--border); background:var(--surface-1); color:var(--text-primary); border-radius:7px; padding:7px 11px; cursor:pointer; }
+    .skeleton { height:52px; border-bottom:1px solid var(--grid); background:linear-gradient(90deg,transparent,var(--accent-wash),transparent); background-size:200% 100%; animation:shimmer 1.4s infinite; }
+    .inspector-backdrop { position:fixed; inset:0; z-index:20; background:rgba(0,0,0,.32); display:grid; justify-items:end; }
+    .inspector-backdrop[hidden] { display:none; }
+    .inspector { width:min(540px,100vw); height:100vh; overflow:auto; background:var(--surface-1); color:var(--text-primary); box-shadow:var(--shadow); padding:23px clamp(20px,4vw,34px) 36px; animation:slide-in .2s ease-out; }
+    .inspector-top { display:flex; justify-content:space-between; gap:16px; align-items:start; }
+    .close { border:1px solid var(--border); background:transparent; color:var(--text-primary); width:32px; height:32px; border-radius:7px; cursor:pointer; }
+    .inspector .eyebrow { margin-top:3px; }
+    .inspector h2 { font-size:23px; line-height:1.12; letter-spacing:-.035em; margin:0; }
+    .inspector-block { border-top:1px solid var(--grid); padding-top:14px; margin-top:18px; }
+    .inspector-block h3 { margin:0 0 7px; font-size:9px; text-transform:uppercase; letter-spacing:.08em; color:var(--text-muted); }
+    .inspector-block p { font-size:11px; line-height:1.6; color:var(--text-secondary); margin:0; }
+    .evidence-list { display:grid; gap:7px; }
+    .evidence-link { display:block; color:var(--text-primary); text-decoration:none; border-left:2px solid var(--series-1); padding:5px 8px; font-size:10px; line-height:1.4; background:var(--accent-wash); }
+    .evidence-link small { color:var(--text-muted); display:block; margin-top:3px; }
+    .answer-grid { display:grid; gap:6px; margin-top:9px; }
+    .answer { border:1px solid var(--border); border-radius:7px; padding:9px 10px; text-align:left; background:var(--surface-1); color:var(--text-primary); cursor:pointer; font-size:10.5px; font-weight:700; }
+    .answer:hover { border-color:var(--series-1); background:var(--accent-wash); }
+    .decision-note { width:100%; min-height:70px; resize:vertical; margin-top:9px; border:1px solid var(--border); border-radius:7px; background:var(--page); color:var(--text-primary); padding:8px; font-size:10.5px; }
+    .decision-history { display:grid; gap:8px; }
+    .decision-record { padding:9px; background:var(--surface-2); border-radius:7px; }
+    .decision-record strong { font-size:10px; }
+    .decision-record p { font-size:9px; margin:3px 0; white-space:pre-wrap; }
+    .restore { border:0; padding:0; color:var(--series-1); background:none; font-size:9px; cursor:pointer; }
+    .toast { position:fixed; z-index:30; right:22px; bottom:22px; max-width:360px; border:1px solid var(--border); border-left:3px solid var(--series-3); background:var(--surface-1); color:var(--text-primary); box-shadow:var(--shadow); padding:11px 13px; border-radius:7px; font-size:10px; line-height:1.45; }
+    .toast.error { border-left-color:var(--series-2); }
+    .toast[hidden] { display:none; }
+    body.scroll-locked { overflow:hidden; }
+    @keyframes slide-in { from { transform:translateX(26px); opacity:.7; } to { transform:translateX(0); opacity:1; } }
+    @keyframes shimmer { to { background-position:-200% 0; } }
+    @keyframes reveal { from { transform:translateY(5px); opacity:0; } to { transform:none; opacity:1; } }
+    .loaded .signal-row,.loaded .capacity-item { animation:reveal .24s ease-out both; }
+    @media (prefers-reduced-motion:reduce) { *,*::before,*::after { animation:none!important; transition:none!important; scroll-behavior:auto!important; } }
+    @media (max-width:1050px) { .workspace { grid-template-columns:1fr; } .chat-panel { position:static; border-left:0; border-top:1px solid var(--text-primary); padding:18px 0 0; } .chat-thread { max-height:none; } }
+    @media (max-width:760px) {
+      .shell { display:block; } .sidebar { display:none; } .main { padding:0 15px 40px; }
+      .topbar { height:auto; min-height:62px; flex-wrap:wrap; padding:9px 0; }
+      .mobile-brand { display:flex; align-items:center; gap:7px; font-weight:800; font-size:12px; }
+      .mobile-brand .brand-mark { width:25px; height:25px; border-radius:7px; } .context { display:none; } .select { max-width:143px; }
+      .ask-top { display:block; flex:1 0 100%; }
+      .status-strip { line-height:1.4; padding:6px 0; } .intro { grid-template-columns:1fr; padding-top:24px; gap:16px; } h1 { font-size:31px; }
+      .summary-facts { border-top:1px solid var(--grid); padding-top:13px; } .signal-row { grid-template-columns:66px minmax(0,1fr) 18px; gap:10px; }
+      .signal-meta { display:none; } .split { grid-template-columns:1fr; } .footer { flex-direction:column; } .inspector { width:100vw; }
+    }
+  </style>
+</head>
+<body>
+<div class="viz-root">
+  <div class="shell">
+    <aside class="sidebar" aria-label="People Pulse navigation">
+      <a class="brand" href="#overview"><span class="brand-mark">PP</span><span class="brand-copy">People Pulse<small>Work intelligence</small></span></a>
+      <div class="side-label">Weekly workspace</div>
+      <nav class="side-nav">
+        <a class="active" href="#attention">Needs attention</a><a href="#coverage">Department coverage</a><a href="#capacity">Capacity review</a><a href="#moments">People moments</a><a href="#ask">Ask People Pulse</a>
+      </nav>
+      <div class="scope-note"><div class="mode-stack" id="sideModes"></div>Approved public team channels only.<br>No DMs. No employee scoring. No outbound actions.</div>
+    </aside>
+    <main class="main" id="overview">
+      <header class="topbar">
+        <div class="mobile-brand"><span class="brand-mark">PP</span> People Pulse</div>
+        <div class="context"><strong>Executive workspace</strong><span id="sessionLabel">Verifying access…</span></div><div class="top-spacer"></div>
+        <select class="select" id="weekSelect" aria-label="Insight week"><option>Loading weeks…</option></select>
+        <button class="icon-btn" id="themeButton" aria-label="Toggle light and dark theme" title="Toggle theme">◐</button>
+        <button class="ask-top" id="askButton">Ask People Pulse</button>
+      </header>
+      <div class="status-strip" id="statusStrip"><span class="status-dot"></span><span id="statusText">Connecting to the authorized weekly snapshot…</span></div>
+      <div id="appState"><section class="intro"><div><p class="eyebrow">Loading verified evidence</p><h1>Finding this week’s work-system signals.</h1></div></section><div class="skeleton"></div><div class="skeleton"></div><div class="skeleton"></div></div>
+      <footer class="footer"><span id="footerModes">Modes loading…</span><span>People Pulse records decisions but never posts, assigns, sends, or marks the underlying work complete.</span></footer>
+    </main>
+  </div>
+  <div class="inspector-backdrop" id="inspectorBackdrop" hidden><aside class="inspector" id="inspector" role="dialog" aria-modal="true" aria-labelledby="inspectorTitle"></aside></div>
+  <div class="toast" id="toast" role="status" aria-live="polite" hidden></div>
+</div>
+<script>
+(() => {
+  "use strict";
+  const state={session:null,weeks:[],snapshot:null,decisions:[],department:"All",selectedSignal:null,chat:[],chatSequence:0};
+  const appState=document.getElementById("appState"),weekSelect=document.getElementById("weekSelect"),statusStrip=document.getElementById("statusStrip"),statusText=document.getElementById("statusText"),inspectorBackdrop=document.getElementById("inspectorBackdrop"),inspector=document.getElementById("inspector"),toast=document.getElementById("toast");
+  const palette=["var(--series-1)","var(--series-2)","var(--series-3)","var(--text-muted)","var(--warning)"];
+  const el=(tag,className,text)=>{const node=document.createElement(tag);if(className)node.className=className;if(text!==undefined)node.textContent=text;return node;};
+  const svgEl=(tag,attrs)=>{const node=document.createElementNS("http://www.w3.org/2000/svg",tag);Object.entries(attrs||{}).forEach(([name,value])=>node.setAttribute(name,String(value)));return node;};
+  const request=async(url,options)=>{const init=options?{...options}:undefined;if(init?.method==="POST")init.headers={...init.headers,"x-people-pulse-csrf":"1"};const response=await fetch(url,init);let payload={};try{payload=await response.json();}catch{}if(!response.ok){const error=new Error(payload.error||`Request failed (${response.status})`);error.status=response.status;throw error;}return payload;};
+
+  async function boot(){setStatus("Connecting to the authorized weekly snapshot…");try{const[session,weeks]=await Promise.all([request("/api/session"),request("/api/weeks")]);state.session=session;state.weeks=weeks.weeks;document.getElementById("sessionLabel").textContent=`${session.identity.displayName} · ${session.identity.demo?"local demo identity":"verified executive"}`;renderModes(session.modes);weekSelect.replaceChildren(...state.weeks.map(week=>{const option=el("option","",formatWeek(week));option.value=week;return option;}));if(!state.weeks.length)return renderState("No weekly snapshots","Run the TEST/MOCK demo pipeline to create the first validated artifact.");await loadWeek(state.weeks[0]);}catch(error){renderFailure(error);}}
+  async function loadWeek(week){setStatus(`Loading week of ${formatWeek(week)}…`);appState.replaceChildren(el("div","skeleton"),el("div","skeleton"),el("div","skeleton"));try{const[snapshot,decisionData]=await Promise.all([request(`/api/insights/${week}`),request("/api/decisions")]);state.snapshot=snapshot;state.decisions=decisionData.decisions;state.department="All";state.chat=[];render();}catch(error){renderFailure(error);}}
+  function render(){const snapshot=state.snapshot;if(!snapshot)return;appState.replaceChildren();appState.className="loaded";const intro=el("section","intro"),introText=el("div");introText.append(el("p","eyebrow",`Week of ${formatWeek(snapshot.weekStart)} · approved-channel evidence`),el("h1","",attentionHeadline(snapshot)),el("p","intro-copy",snapshot.summary));const facts=el("div","summary-facts");facts.append(summaryFact(snapshot.signals.filter(s=>s.urgency==="today"&&s.state==="open").length,"need attention today"),summaryFact(snapshot.signals.filter(s=>s.type==="waiting-decision"&&s.state==="open").length,"decisions waiting"),summaryFact(snapshot.capacitySignals.length,"capacity patterns"));intro.append(introText,facts);appState.append(intro,renderFilters(),renderWorkspace());const ageDays=Math.floor((Date.now()-Date.parse(snapshot.generatedAt))/86400000),stateClass=snapshot.audit.status==="partial"?"partial":ageDays>8?"stale":"";statusStrip.className=`status-strip ${stateClass}`;const freshness=new Date(snapshot.generatedAt).toLocaleString([],{month:"short",day:"numeric",hour:"numeric",minute:"2-digit"});setStatus(`${snapshot.audit.status==="partial"?"Partial snapshot":ageDays>8?"Stale snapshot":"Validated snapshot"} · generated ${freshness} · ${snapshot.audit.channelsRead} approved channels · ${snapshot.audit.messagesRead} human messages processed`);}
+  function renderFilters(){const wrap=el("div","filters"),departments=["All",...state.snapshot.departmentCoverage.map(row=>row.department)];departments.forEach(department=>{const button=el("button",`filter ${state.department===department?"active":""}`,department);button.type="button";button.onclick=()=>{state.department=department;render();};wrap.append(button);});return wrap;}
+  function renderWorkspace(){const workspace=el("div","workspace"),flow=el("div","content-flow");flow.append(renderAttention(),renderCoverage(),renderCapacity(),renderLower());workspace.append(flow,renderChat());return workspace;}
+  function renderAttention(){const section=el("section","section");section.id="attention";section.append(sectionHead("Needs attention","Task evidence, interpretation, and the executive decision still needed"));const list=el("div","attention-list"),signals=filteredSignals();if(!signals.length)list.append(renderInlineEmpty("No cited signals match this department filter."));signals.forEach((signal,index)=>{const row=el("button",`signal-row delay-${Math.min(index,8)}`);row.type="button";row.setAttribute("aria-label",`Inspect ${signal.headline}`);const urgency=el("span",`urgency ${signal.urgency}`,signal.urgency.replace("-"," ")),main=el("span","signal-main");main.append(el("strong","",signal.headline),el("span","",signal.observationSummary));const meta=el("span","signal-meta");meta.append(el("b",signal.state!=="open"?"state-label":"",signal.state==="open"?signal.departments.join(" + "):signal.state),document.createTextNode(`${signal.evidenceIds.length} source${signal.evidenceIds.length===1?"":"s"} · ${Math.round(signal.confidence*100)}% confidence`));row.append(urgency,main,meta,el("span","arrow","›"));row.onclick=()=>openInspector(signal.id);list.append(row);});section.append(list);return section;}
+  function renderCoverage(){const section=el("section","section");section.id="coverage";section.append(sectionHead("Department task coverage","Context for follow-up, not a productivity score"));const wrap=el("div","table-wrap"),table=el("table"),head=el("thead"),tr=el("tr");["Department","Headcount","Activity vs usual","Needs follow-up","People moments","What to know"].forEach(label=>tr.append(el("th","",label)));head.append(tr);table.append(head);const body=el("tbody");filteredCoverage().forEach(row=>{const item=el("tr");item.append(el("td","",row.department),el("td","",String(row.headcount)));const activity=el("td");activity.append(el("span","activity-label",row.participationVsUsual.replace("-"," ")));item.append(activity,el("td","",String(row.waitingForFollowUp)),el("td","",String(row.peopleMoments)),el("td","",row.whatToKnow));body.append(item);});table.append(body);wrap.append(table);section.append(wrap);return section;}
+  function renderCapacity(){const section=el("section","section");section.id="capacity";section.append(sectionHead("Capacity review","A role hypothesis appears only after process and resourcing alternatives"));const list=el("div","capacity-list"),values=state.snapshot.capacitySignals.filter(item=>state.department==="All"||item.departments.includes(state.department));if(!values.length)list.append(renderInlineEmpty("No sustained multi-week capacity pattern meets the evidence threshold."));values.forEach((item,index)=>{const wrap=el("article",`capacity-item delay-${Math.min(index,8)}`);const top=el("div","capacity-top");top.append(el("strong","",item.headline),el("span","capacity-count",`${item.occurrenceCount} observations · ${item.weeksObserved} weeks`));wrap.append(top,el("p","",item.operationalImpact));const ladder=el("div","ladder");item.interventions.forEach(step=>ladder.append(el("span","",step)));wrap.append(ladder,el("p","",item.roleHypothesis));list.append(wrap);});section.append(list);return section;}
+  function renderLower(){const split=el("div","split"),moments=el("section","section");moments.id="moments";moments.append(sectionHead("People moments","Existing HR review queue"));const momentList=el("div"),values=state.snapshot.peopleMoments.filter(item=>state.department==="All"||item.department===state.department);if(!values.length)momentList.append(renderInlineEmpty("No people moments match this department."));values.forEach(item=>{const row=el("div","moment-row");row.append(el("span","avatar",item.initials));const copy=el("span","moment-copy");copy.append(el("strong","",item.displayName),el("span","",`${item.description} · ${item.dateLabel}`));const link=el("a","text-link",item.actionLabel);link.href=item.queueUrl;row.append(copy,link);momentList.append(row);});moments.append(momentList);const activity=el("section","section");activity.append(sectionHead("Activity context","Indexed to each department’s 8-week usual — not a performance score"),renderChart());split.append(moments,activity);return split;}
+  function renderChart(){const chart=el("div","chart"),series=state.snapshot.activity.series.filter(item=>state.department==="All"||item.department===state.department),legend=el("div","legend");series.forEach((item,index)=>{const label=el("span"),swatch=el("i",`series-color-${index%palette.length}`);label.append(swatch,document.createTextNode(item.department));legend.append(label);});chart.append(legend);const svg=svgEl("svg",{viewBox:"0 0 680 156",role:"img","aria-label":"Eight-week indexed approved-channel activity context"});[28,75,122].forEach(y=>svg.append(svgEl("line",{x1:4,y1:y,x2:676,y2:y,stroke:"var(--grid)","stroke-width":1})));state.snapshot.activity.weekLabels.forEach((label,index)=>{const x=12+index*(656/7),text=svgEl("text",{x,y:151,fill:"var(--text-muted)","font-size":9,"text-anchor":index===0?"start":index===7?"end":"middle"});text.textContent=label;svg.append(text);});series.forEach((item,index)=>{const points=item.indexedValues.map((value,i)=>`${12+i*(656/7)},${132-Math.min(200,value)*.52}`).join(" ");svg.append(svgEl("polyline",{points,fill:"none",stroke:palette[index%palette.length],"stroke-width":2,"stroke-linecap":"round","stroke-linejoin":"round"}));item.indexedValues.forEach((value,i)=>svg.append(svgEl("circle",{cx:12+i*(656/7),cy:132-Math.min(200,value)*.52,r:2.4,fill:palette[index%palette.length]})));});chart.append(svg);return chart;}
+  function renderChat(){const panel=el("aside","chat-panel");panel.id="ask";const head=el("div","chat-head"),title=el("div");title.append(el("h2","","Ask People Pulse"),el("span","",`Snapshot chat · ${state.session?.modes?.chat||"MOCK"}`));head.append(title);panel.append(head,el("p","chat-scope",`Ask an unscheduled question about the ${formatWeek(state.snapshot.weekStart)} validated snapshot. Answers stay within cited approved-channel evidence and are not retained after this page session.`));const thread=el("div","chat-thread");thread.setAttribute("aria-live","polite");if(!state.chat.length)thread.append(el("div","chat-empty","Ask about waiting decisions, task ownership, handoffs, recurring work, coverage gaps, or capacity evidence."));state.chat.forEach(turn=>{const wrap=el("section","chat-turn");wrap.append(el("div","chat-question",turn.question));if(turn.loading)wrap.append(el("div","chat-loading","Reviewing the validated snapshot…"));else if(turn.error){const answer=el("div","chat-answer refused");answer.append(el("p","",turn.error));wrap.append(answer);}else if(turn.answer){const answer=el("div",`chat-answer ${turn.answer.status}`),meta=el("div","chat-meta");meta.append(el("span","",turn.answer.status.replace("-"," ")),el("span","",`${turn.answer.provider.mode} · ${turn.answer.provider.contacted?"provider contacted":"no provider contact"}`));answer.append(meta,el("p","",turn.answer.answer));if(turn.answer.citations.length){const citations=el("div","chat-citations");turn.answer.citations.forEach(item=>{const link=slackLink("chat-citation",item.summary,item.permalink);if(!link)return;link.append(el("small","",`${item.channelName} · ${new Date(item.messageTimestamp).toLocaleString()}`));citations.append(link);});answer.append(citations);}if(turn.answer.limitations.length)answer.append(el("p","chat-limitations",`Limits: ${turn.answer.limitations.join(" ")}`));if(turn.answer.suggestedQuestions.length){const suggestions=el("div","suggestions");turn.answer.suggestedQuestions.forEach(question=>{const button=el("button","suggestion",question);button.type="button";button.onclick=()=>askPeoplePulse(question);suggestions.append(button);});answer.append(suggestions);}wrap.append(answer);}thread.append(wrap);});panel.append(thread);if(!state.chat.length){const suggestions=el("div","suggestions");["What needs an executive decision?","Where are the coverage gaps?","Which recurring tasks may justify capacity review?"].forEach(question=>{const button=el("button","suggestion",question);button.type="button";button.onclick=()=>askPeoplePulse(question);suggestions.append(button);});panel.append(suggestions);}const form=el("form","chat-form"),input=el("textarea");input.name="chatQuestion";input.placeholder="Ask a work-system question…";input.maxLength=500;input.setAttribute("aria-label","Ask People Pulse a question");const ask=el("button","ask-chat","Ask People Pulse");ask.type="submit";ask.disabled=state.chat.some(turn=>turn.loading);form.append(input,ask);form.onsubmit=event=>{event.preventDefault();const question=input.value;input.value="";askPeoplePulse(question);};panel.append(form,el("p","boundary-note","Snapshot-only in this release. No DMs, private channels, medical or protected data, employee scoring, or outbound actions. For information newer than the generated time, refresh the approved snapshot."));return panel;}
+  async function askPeoplePulse(question){const trimmed=String(question||"").trim();if(trimmed.length<3){showToast("Enter a work-system question first.",true);return;}const id=++state.chatSequence;state.chat.push({id,question:trimmed,loading:true});render();try{const answer=await request(`/api/chat?week=${encodeURIComponent(state.snapshot.weekStart)}`,{method:"POST",headers:{"content-type":"application/json"},body:JSON.stringify({question:trimmed,department:state.department})});const turn=state.chat.find(item=>item.id===id);if(turn){turn.loading=false;turn.answer=answer;}render();}catch(error){const turn=state.chat.find(item=>item.id===id);if(turn){turn.loading=false;turn.error=error.message;}render();showToast(error.message,true);}}
+  async function openInspector(signalId){state.selectedSignal=signalId;const signal=state.snapshot.signals.find(item=>item.id===signalId);if(!signal)return;inspector.replaceChildren();const top=el("div","inspector-top"),title=el("div");title.append(el("p","eyebrow",`${signal.urgency.replace("-"," ")} · ${signal.state}`),el("h2","",signal.headline));title.lastChild.id="inspectorTitle";const close=el("button","close","×");close.type="button";close.setAttribute("aria-label","Close signal details");close.onclick=closeInspector;top.append(title,close);inspector.append(top,inspectorBlock("What happened",signal.observationSummary),inspectorBlock("Interpretation",signal.interpretation),inspectorBlock("Suggested next step",signal.suggestedAction),inspectorBlock("Risk of a wrong decision",signal.wrongDecisionRisk));const evidenceBlock=el("section","inspector-block");evidenceBlock.append(el("h3","","Authorized evidence"));const evidenceList=el("div","evidence-list");signal.evidenceIds.map(id=>state.snapshot.evidence.find(item=>item.id===id)).filter(Boolean).forEach(item=>{const link=slackLink("evidence-link",item.boundedSummary||"Authorized source",item.permalink);if(!link)return;link.append(el("small","",`${item.channelName} · ${new Date(item.messageTimestamp).toLocaleString()}`));evidenceList.append(link);});evidenceBlock.append(evidenceList);inspector.append(evidenceBlock);const answerBlock=el("section","inspector-block");answerBlock.append(el("h3","","Decision needed"),el("p","",signal.question));const note=el("textarea","decision-note");note.placeholder="Optional context to include in the follow-up instruction";note.maxLength=1000;const grid=el("div","answer-grid");signal.acceptedAnswers.forEach(answer=>{const button=el("button","answer",`Copy & record · ${answer.label}`);button.type="button";button.onclick=()=>recordDecision(signal,answer,note.value,button);grid.append(button);});answerBlock.append(note,grid);inspector.append(answerBlock);const history=el("section","inspector-block");history.append(el("h3","","Decision history"));const historyList=el("div","decision-history"),records=state.decisions.filter(item=>item.signalId===signal.id).slice().reverse();if(!records.length)historyList.append(el("p","","No answer has been recorded."));records.forEach(record=>{const row=el("div","decision-record");row.append(el("strong","",`${record.answerLabel} · ${record.decidedBy}`),el("p","",`${new Date(record.decidedAt).toLocaleString()}${record.restoredAt?" · reopened":""}`));if(!record.restoredAt){const restore=el("button","restore","Reopen this decision");restore.type="button";restore.onclick=()=>restoreDecision(record.id);row.append(restore);}historyList.append(row);});history.append(historyList);inspector.append(history);inspectorBackdrop.hidden=false;document.body.classList.add("scroll-locked");close.focus();}
+  async function recordDecision(signal,answer,note,button){button.disabled=true;button.textContent="Recording…";try{const result=await request(`/api/signals/${signal.id}/decisions?week=${encodeURIComponent(state.snapshot.weekStart)}`,{method:"POST",headers:{"content-type":"application/json"},body:JSON.stringify({answerId:answer.id,note})});try{await navigator.clipboard.writeText(result.decision.composedInstruction);showToast("Decision recorded and follow-up instruction copied.");}catch{showToast("Decision recorded. Clipboard access was unavailable; the instruction remains in decision history.");}const[snapshot,decisionData]=await Promise.all([request(`/api/insights/${state.snapshot.weekStart}`),request("/api/decisions")]);state.snapshot=snapshot;state.decisions=decisionData.decisions;render();openInspector(signal.id);}catch(error){showToast(error.message,true);button.disabled=false;button.textContent=`Copy & record · ${answer.label}`;}}
+  async function restoreDecision(id){try{await request(`/api/decisions/${id}/restore`,{method:"POST",headers:{"content-type":"application/json"},body:JSON.stringify({reason:"Reopened by the executive from the review workspace."})});const[snapshot,decisionData]=await Promise.all([request(`/api/insights/${state.snapshot.weekStart}`),request("/api/decisions")]);state.snapshot=snapshot;state.decisions=decisionData.decisions;render();openInspector(state.selectedSignal);showToast("Decision reopened with its history preserved.");}catch(error){showToast(error.message,true);}}
+  function closeInspector(){inspectorBackdrop.hidden=true;document.body.classList.remove("scroll-locked");state.selectedSignal=null;}
+  function inspectorBlock(title,text){const block=el("section","inspector-block");block.append(el("h3","",title),el("p","",text));return block;}
+  function sectionHead(title,copy){const head=el("header","section-head");head.append(el("h2","",title),el("p","",copy));return head;}
+  function summaryFact(value,label){const item=el("div","summary-fact");item.append(el("b","",String(value)),el("span","",label));return item;}
+  function renderInlineEmpty(copy){return el("p","inline-empty",copy);}
+  function slackLink(className,label,value){try{const url=new URL(value);if(url.protocol!=="https:"||!url.hostname.endsWith(".slack.com")||!url.pathname.startsWith("/archives/"))return null;const link=el("a",className,label);link.href=url.href;link.target="_blank";link.rel="noopener noreferrer";return link;}catch{return null;}}
+  function filteredSignals(){const values=state.snapshot.signals.filter(signal=>state.department==="All"||signal.departments.includes(state.department));return values.sort((a,b)=>urgencyRank(a.urgency)-urgencyRank(b.urgency)||a.headline.localeCompare(b.headline));}
+  function filteredCoverage(){return state.snapshot.departmentCoverage.filter(row=>state.department==="All"||row.department===state.department);}
+  function urgencyRank(value){return value==="today"?0:value==="this-week"?1:2;}
+  function attentionHeadline(snapshot){const open=snapshot.signals.filter(signal=>signal.state==="open"&&signal.urgency!=="monitor").length;return open?`${open} work-system signals need a clear next decision.`:"No cited work-system signal needs an immediate decision.";}
+  function formatWeek(value){return new Date(`${value}T00:00:00Z`).toLocaleDateString([],{month:"short",day:"numeric",year:"numeric",timeZone:"UTC"});}
+  function renderModes(modes){const labels=Object.entries(modes).map(([key,value])=>`${key.toUpperCase()} ${value}`),container=document.getElementById("sideModes");container.replaceChildren(...labels.map(label=>el("span","mode",label)));document.getElementById("footerModes").textContent=`Effective modes · ${labels.join(" · ")}`;}
+  function setStatus(text){statusText.textContent=text;}
+  function renderState(title,copy){appState.replaceChildren();const box=el("section","state");box.append(el("h2","",title),el("p","",copy));appState.append(box);}
+  function renderFailure(error){const title=error.status===401?"Authentication required":error.status===403?"Executive access required":"People Pulse could not load",copy=error.status===401?"Sign in through the configured identity provider to access weekly evidence.":error.status===403?"This workspace is restricted to the authorized executive role.":error.message;appState.replaceChildren();const box=el("section","state");box.append(el("h2","",title),el("p","",copy));if(![401,403].includes(error.status)){const retry=el("button","retry","Try again");retry.onclick=boot;box.append(retry);}appState.append(box);setStatus(title);}
+  function showToast(message,isError){toast.textContent=message;toast.classList.toggle("error",Boolean(isError));toast.hidden=false;clearTimeout(showToast.timer);showToast.timer=setTimeout(()=>toast.hidden=true,4200);}
+  weekSelect.addEventListener("change",()=>loadWeek(weekSelect.value));document.getElementById("askButton").addEventListener("click",()=>document.getElementById("ask")?.scrollIntoView({behavior:"smooth",block:"start"}));document.getElementById("themeButton").addEventListener("click",()=>{const current=document.documentElement.dataset.theme,next=current==="dark"?"light":"dark";document.documentElement.dataset.theme=next;localStorage.setItem("pp-theme",next);});const savedTheme=localStorage.getItem("pp-theme");if(savedTheme)document.documentElement.dataset.theme=savedTheme;inspectorBackdrop.addEventListener("click",event=>{if(event.target===inspectorBackdrop)closeInspector();});document.addEventListener("keydown",event=>{if(event.key==="Escape"&&!inspectorBackdrop.hidden)closeInspector();});boot();
+})();
+</script>
+</body>
+</html>

@@ -1,0 +1,17 @@
+project_id           = "company-people-pulse-prod"
+region               = "us-east1"
+service_name         = "people-pulse"
+image_digest         = "us-east1-docker.pkg.dev/company-people-pulse-prod/internal/people-pulse@sha256:REPLACE_WITH_64_HEX_CHARACTERS"
+workspace_domain     = "example.com"
+iap_access_group     = "group:people-pulse-hr@example.com"
+snapshot_bucket_name = "company-people-pulse-prod-snapshots"
+decision_bucket_name = "company-people-pulse-prod-decisions"
+
+# First controlled pilot: real managed identity/storage, fixture-backed providers.
+slack_read_mode = "MOCK"
+ai_mode         = "MOCK"
+chat_mode       = "MOCK"
+
+# Required only after the separate live embedded-chat approval gate:
+# chat_model                 = "company-approved-claude-model"
+# anthropic_chat_secret_id   = "people-pulse-anthropic-api-key"

@@ -1,0 +1,101 @@
+[
+  {
+    "runId": "pp_20260817_1ec291cea0cd",
+    "weekStart": "2026-08-17",
+    "generatedAt": "2026-08-20T20:00:00.000Z",
+    "departments": 4,
+    "channelsRead": 4,
+    "messagesRead": 14,
+    "taskObservations": 13,
+    "signals": 9,
+    "model": "mock-people-pulse-v1",
+    "tokensIn": 0,
+    "tokensOut": 0,
+    "costEstimateUsd": 0,
+    "modes": {
+      "data": "TEST",
+      "slackRead": "MOCK",
+      "ai": "MOCK",
+      "chat": "MOCK",
+      "notify": "OFF",
+      "writeback": "OFF"
+    },
+    "outputHash": "1ec291cea0cde2632220754834a823ba4f91156f31743b3ea10332a87df0d9d9",
+    "status": "complete",
+    "errorCode": ""
+  },
+  {
+    "runId": "pp_20260817_9743f89e78cb",
+    "weekStart": "2026-08-17",
+    "generatedAt": "2026-08-20T20:00:00.000Z",
+    "departments": 4,
+    "channelsRead": 4,
+    "messagesRead": 14,
+    "taskObservations": 13,
+    "signals": 9,
+    "model": "mock-people-pulse-v1",
+    "tokensIn": 0,
+    "tokensOut": 0,
+    "costEstimateUsd": 0,
+    "modes": {
+      "data": "TEST",
+      "slackRead": "MOCK",
+      "ai": "MOCK",
+      "chat": "MOCK",
+      "notify": "OFF",
+      "writeback": "OFF"
+    },
+    "outputHash": "9743f89e78cb93d26882aaaf3a9dd832ec7b05fea49d4b40b6444ec51fc27957",
+    "status": "complete",
+    "errorCode": ""
+  },
+  {
+    "runId": "pp_20260817_596e20a3a8a1",
+    "weekStart": "2026-08-17",
+    "generatedAt": "2026-08-20T20:00:00.000Z",
+    "departments": 4,
+    "channelsRead": 4,
+    "messagesRead": 15,
+    "taskObservations": 13,
+    "signals": 9,
+    "model": "mock-people-pulse-v1",
+    "tokensIn": 0,
+    "tokensOut": 0,
+    "costEstimateUsd": 0,
+    "modes": {
+      "data": "TEST",
+      "slackRead": "MOCK",
+      "ai": "MOCK",
+      "chat": "MOCK",
+      "notify": "OFF",
+      "writeback": "OFF"
+    },
+    "outputHash": "596e20a3a8a13ae80c7bdf439eb2079b5d829d40181bd9f3ae437e232e39e06c",
+    "status": "complete",
+    "errorCode": ""
+  },
+  {
+    "runId": "pp_20260817_d3b009692f53",
+    "weekStart": "2026-08-17",
+    "generatedAt": "2026-08-20T20:00:00.000Z",
+    "departments": 4,
+    "channelsRead": 4,
+    "messagesRead": 15,
+    "taskObservations": 13,
+    "signals": 9,
+    "model": "mock-people-pulse-v1",
+    "tokensIn": 0,
+    "tokensOut": 0,
+    "costEstimateUsd": 0,
+    "modes": {
+      "data": "TEST",
+      "slackRead": "MOCK",
+      "ai": "MOCK",
+      "notify": "OFF",
+      "writeback": "OFF"
+    },
+    "outputHash": "d3b009692f53c068ed8f9f0cc6e89cbdd80041a4c90a4d6283602196805f191e",
+    "status": "complete",
+    "errorCode": ""
+  }
+]

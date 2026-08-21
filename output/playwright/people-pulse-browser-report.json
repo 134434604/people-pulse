@@ -1,0 +1,112 @@
+{
+  "baseUrl": "http://127.0.0.1:59513",
+  "checks": [
+    {
+      "check": "Dashboard loaded validated snapshot",
+      "status": "PASS"
+    },
+    {
+      "check": "TEST/MOCK/OFF modes visible",
+      "status": "PASS"
+    },
+    {
+      "check": "Four departments visible",
+      "status": "PASS"
+    },
+    {
+      "check": "Capacity ladder renders six alternatives",
+      "status": "PASS"
+    },
+    {
+      "check": "Ask People Pulse returns a cited unscheduled snapshot answer",
+      "status": "PASS"
+    },
+    {
+      "check": "MOCK chat visibly proves zero provider contact",
+      "status": "PASS"
+    },
+    {
+      "check": "Employee-scoring question is refused without provider contact",
+      "status": "PASS"
+    },
+    {
+      "check": "No duplicate copy-to-Claude workflow is exposed",
+      "status": "PASS"
+    },
+    {
+      "check": "Chat turns are session-only and disappear on reload",
+      "status": "PASS"
+    },
+    {
+      "check": "Signal inspector separates observation, interpretation, risk, and evidence",
+      "status": "PASS"
+    },
+    {
+      "check": "Copy records a decision and concludes the card",
+      "status": "PASS"
+    },
+    {
+      "check": "Conclusion is reversible with history preserved",
+      "status": "PASS"
+    },
+    {
+      "check": "Mobile keeps Ask People Pulse one tap away",
+      "status": "PASS"
+    },
+    {
+      "check": "Mobile viewport has no page-level horizontal overflow",
+      "status": "PASS"
+    },
+    {
+      "check": "No browser console errors",
+      "status": "PASS"
+    },
+    {
+      "check": "No failed requests or HTTP 5xx",
+      "status": "PASS"
+    },
+    {
+      "check": "Permission denial renders the executive access boundary",
+      "status": "PASS"
+    },
+    {
+      "check": "Empty week list renders a useful first-run state",
+      "status": "PASS"
+    },
+    {
+      "check": "Snapshot HTTP failure renders a bounded retry state",
+      "status": "PASS"
+    },
+    {
+      "check": "Stale evidence is visibly labeled",
+      "status": "PASS"
+    },
+    {
+      "check": "Partial evidence is visibly labeled",
+      "status": "PASS"
+    },
+    {
+      "check": "Sparse results and long executive copy remain usable on mobile",
+      "status": "PASS"
+    },
+    {
+      "check": "Delayed snapshot shows loading skeletons and then resolves",
+      "status": "PASS"
+    },
+    {
+      "check": "Decision conflict remains non-executing and recoverable",
+      "status": "PASS"
+    },
+    {
+      "check": "Chat provider failure renders a bounded inline error",
+      "status": "PASS"
+    }
+  ],
+  "consoleErrors": [],
+  "failedRequests": [],
+  "screenshots": [
+    "C:\\dev\\hr-moments-assistant\\people-pulse\\output\\playwright\\people-pulse-light.png",
+    "C:\\dev\\hr-moments-assistant\\people-pulse\\output\\playwright\\people-pulse-dark.png",
+    "C:\\dev\\hr-moments-assistant\\people-pulse\\output\\playwright\\people-pulse-mobile.png"
+  ]
+}

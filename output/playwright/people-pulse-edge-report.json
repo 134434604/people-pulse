@@ -1,0 +1,34 @@
+{
+  "checks": [
+    {
+      "check": "Edge A — path-traversal & malformed week IDs are all rejected (no 200, no data leak)",
+      "status": "PASS",
+      "note": "/api/insights/../../../../etc/passwd → 404  |  /api/insights/../../people-pulse/data/decisions → 404  |  /api/insights/2026-13-99 → 404  |  /api/insights/2026-08-17'; DROP TABLE x;-- → 400  |  /api/insights/%2e%2e%2f%2e%2e%2fpackage → 404  |  /api/insights/....//....//etc/passwd → 404"
+    },
+    {
+      "check": "Edge A — a valid week ID still returns its snapshot",
+      "status": "PASS",
+      "note": ""
+    },
+    {
+      "check": "Edge B — snapshot renders with adversarial payload present as text",
+      "status": "PASS",
+      "note": ""
+    },
+    {
+      "check": "Edge B — injected <img onerror> did NOT execute (no beacon, no dialog)",
+      "status": "PASS",
+      "note": ""
+    },
+    {
+      "check": "Edge B — payload is not a live injected DOM node",
+      "status": "PASS",
+      "note": "live <img data-ppxss>=0"
+    }
+  ],
+  "consoleErrors": [],
+  "dialogs": [],
+  "screenshots": [
+    "C:\\dev\\hr-moments-assistant\\people-pulse\\output\\playwright\\people-pulse-edge.png"
+  ]
+}

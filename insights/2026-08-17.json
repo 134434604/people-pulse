@@ -1,0 +1,780 @@
+{
+  "schemaVersion": 3,
+  "weekStart": "2026-08-17",
+  "generatedAt": "2026-08-20T20:00:00.000Z",
+  "runId": "pp_20260817_d3b009692f53",
+  "outputHash": "d3b009692f53c068ed8f9f0cc6e89cbdd80041a4c90a4d6283602196805f191e",
+  "modes": {
+    "data": "TEST",
+    "slackRead": "MOCK",
+    "ai": "MOCK",
+    "notify": "OFF",
+    "writeback": "OFF"
+  },
+  "summary": "4 departments reviewed. 4 cited items need attention today; 1 sustained capacity pattern need review.",
+  "departmentCoverage": [
+    {
+      "department": "Engineering",
+      "headcount": 6,
+      "participationVsUsual": "slightly-higher",
+      "waitingForFollowUp": 3,
+      "peopleMoments": 0,
+      "whatToKnow": "Decision waiting · Approvals and decisions"
+    },
+    {
+      "department": "Marketing",
+      "headcount": 5,
+      "participationVsUsual": "higher",
+      "waitingForFollowUp": 4,
+      "peopleMoments": 1,
+      "whatToKnow": "Decision waiting · Campaign execution"
+    },
+    {
+      "department": "Sales",
+      "headcount": 4,
+      "participationVsUsual": "higher",
+      "waitingForFollowUp": 3,
+      "peopleMoments": 0,
+      "whatToKnow": "Recurring work pattern · Reporting and reconciliation"
+    },
+    {
+      "department": "Support",
+      "headcount": 5,
+      "participationVsUsual": "higher",
+      "waitingForFollowUp": 3,
+      "peopleMoments": 1,
+      "whatToKnow": "Coverage risk · Team coverage"
+    }
+  ],
+  "signals": [
+    {
+      "id": "sig_ceb5567faf5265b6",
+      "type": "coverage-risk",
+      "headline": "Coverage risk · Team coverage",
+      "detail": "A task or workflow may lack backup coverage. 1 supporting observation found.",
+      "observationSummary": "1 task-level observation in team coverage are linked to approved-channel evidence.",
+      "interpretation": "The cited team coverage fact may indicate a coverage risk in the work system.",
+      "departments": [
+        "Support"
+      ],
+      "observationIds": [
+        "obs_c6d3c2e21bb7a20a"
+      ],
+      "evidenceIds": [
+        "ev_166d1412c9c8c69b"
+      ],
+      "weeksObserved": 1,
+      "firstObservedAt": "2026-08-16T18:00:00.000Z",
+      "lastObservedAt": "2026-08-16T18:00:00.000Z",
+      "urgency": "today",
+      "confidence": 0.81,
+      "missingInformation": [
+        "Current backup coverage",
+        "The consequence of an absence",
+        "Accountable owner",
+        "Business deadline"
+      ],
+      "suggestedAction": "Name a trained backup and document the minimum continuity steps.",
+      "question": "Who can provide backup for the team coverage workflow?",
+      "wrongDecisionRisk": "A nominal backup without training can create false confidence during an absence or demand spike.",
+      "acceptedAnswers": [
+        {
+          "id": "assign-backup",
+          "label": "Assign backup coverage",
+          "concludes": true
+        },
+        {
+          "id": "cross-train",
+          "label": "Create a cross-training plan",
+          "concludes": true
+        },
+        {
+          "id": "need-context",
+          "label": "Need more context",
+          "concludes": false
+        }
+      ],
+      "state": "open"
+    },
+    {
+      "id": "sig_8713094c52382e49",
+      "type": "waiting-decision",
+      "headline": "Decision waiting · Approvals and decisions",
+      "detail": "A task is waiting for a decision or approval. 1 supporting observation found.",
+      "observationSummary": "1 task-level observation in approvals and decisions are linked to approved-channel evidence.",
+      "interpretation": "The cited approvals and decisions fact may indicate a waiting decision in the work system.",
+      "departments": [
+        "Engineering"
+      ],
+      "observationIds": [
+        "obs_833677c25b7fcb69"
+      ],
+      "evidenceIds": [
+        "ev_1d2bb03d04c22eb0"
+      ],
+      "weeksObserved": 1,
+      "firstObservedAt": "2026-08-03T15:00:00.000Z",
+      "lastObservedAt": "2026-08-03T15:00:00.000Z",
+      "urgency": "today",
+      "confidence": 0.85,
+      "missingInformation": [
+        "The accountable decision-maker",
+        "The business deadline",
+        "Accountable owner",
+        "Business deadline"
+      ],
+      "suggestedAction": "Name the decision owner and deadline, then capture the outcome.",
+      "question": "Who should decide the approvals and decisions item and by when?",
+      "wrongDecisionRisk": "A rushed answer can move work in the wrong direction; continued delay can hold the dependent work in place.",
+      "acceptedAnswers": [
+        {
+          "id": "decide-now",
+          "label": "Decide now",
+          "concludes": true
+        },
+        {
+          "id": "assign-reviewer",
+          "label": "Assign a reviewer",
+          "concludes": true
+        },
+        {
+          "id": "need-context",
+          "label": "Need more context",
+          "concludes": false
+        }
+      ],
+      "state": "open"
+    },
+    {
+      "id": "sig_a16bccc99a501a29",
+      "type": "waiting-decision",
+      "headline": "Decision waiting · Campaign execution",
+      "detail": "A task is waiting for a decision or approval. 1 supporting observation found.",
+      "observationSummary": "1 task-level observation in campaign execution are linked to approved-channel evidence.",
+      "interpretation": "The cited campaign execution fact may indicate a waiting decision in the work system.",
+      "departments": [
+        "Marketing"
+      ],
+      "observationIds": [
+        "obs_516b6bffea8c99b0"
+      ],
+      "evidenceIds": [
+        "ev_4c97295aa8e49877"
+      ],
+      "weeksObserved": 1,
+      "firstObservedAt": "2026-08-12T13:00:00.000Z",
+      "lastObservedAt": "2026-08-12T13:00:00.000Z",
+      "urgency": "today",
+      "confidence": 0.81,
+      "missingInformation": [
+        "The accountable decision-maker",
+        "The business deadline",
+        "Accountable owner",
+        "Business deadline"
+      ],
+      "suggestedAction": "Name the decision owner and deadline, then capture the outcome.",
+      "question": "Who should decide the campaign execution item and by when?",
+      "wrongDecisionRisk": "A rushed answer can move work in the wrong direction; continued delay can hold the dependent work in place.",
+      "acceptedAnswers": [
+        {
+          "id": "decide-now",
+          "label": "Decide now",
+          "concludes": true
+        },
+        {
+          "id": "assign-reviewer",
+          "label": "Assign a reviewer",
+          "concludes": true
+        },
+        {
+          "id": "need-context",
+          "label": "Need more context",
+          "concludes": false
+        }
+      ],
+      "state": "open"
+    },
+    {
+      "id": "sig_62bab939d92cea11",
+      "type": "recurring-work",
+      "headline": "Recurring work pattern · Reporting and reconciliation",
+      "detail": "A repeatable task may benefit from a clearer process or automation. 4 supporting observations found.",
+      "observationSummary": "4 task-level observations in reporting and reconciliation are linked to approved-channel evidence.",
+      "interpretation": "The cited reporting and reconciliation fact may indicate a recurring work in the work system.",
+      "departments": [
+        "Marketing",
+        "Engineering",
+        "Sales",
+        "Support"
+      ],
+      "observationIds": [
+        "obs_0dd74cba2278b613",
+        "obs_ab64bd48ec525432",
+        "obs_e38ba35eb1c0a679",
+        "obs_2f69a8fe12293a5b"
+      ],
+      "evidenceIds": [
+        "ev_dd7b2509b6bab1b2",
+        "ev_73254618b0b87450",
+        "ev_a9ac48e337dc573b",
+        "ev_9735b76a15f30e35"
+      ],
+      "weeksObserved": 4,
+      "firstObservedAt": "2026-07-20T13:00:00.000Z",
+      "lastObservedAt": "2026-08-10T18:00:00.000Z",
+      "urgency": "today",
+      "confidence": 0.81,
+      "missingInformation": [
+        "Typical time required",
+        "Existing SOP or tooling",
+        "Accountable owner",
+        "Business deadline"
+      ],
+      "suggestedAction": "Confirm frequency and effort before choosing SOP, automation, or capacity.",
+      "question": "Should the reporting and reconciliation work be documented, automated, or monitored?",
+      "wrongDecisionRisk": "Adding capacity before checking process and automation can make an avoidable workflow permanent.",
+      "acceptedAnswers": [
+        {
+          "id": "document-process",
+          "label": "Document the process",
+          "concludes": true
+        },
+        {
+          "id": "assess-automation",
+          "label": "Assess automation",
+          "concludes": true
+        },
+        {
+          "id": "monitor",
+          "label": "Monitor another week",
+          "concludes": true
+        }
+      ],
+      "state": "open"
+    },
+    {
+      "id": "sig_e6d90ec670e75397",
+      "type": "handoff-gap",
+      "headline": "Handoff needs attention · Campaign execution",
+      "detail": "A cross-team handoff may be blocking progress. 1 supporting observation found.",
+      "observationSummary": "1 task-level observation in campaign execution are linked to approved-channel evidence.",
+      "interpretation": "The cited campaign execution fact may indicate a handoff gap in the work system.",
+      "departments": [
+        "Marketing"
+      ],
+      "observationIds": [
+        "obs_bcdbcacf9672123b"
+      ],
+      "evidenceIds": [
+        "ev_0399f135fa87c923"
+      ],
+      "weeksObserved": 1,
+      "firstObservedAt": "2026-08-18T13:00:00.000Z",
+      "lastObservedAt": "2026-08-18T13:00:00.000Z",
+      "urgency": "this-week",
+      "confidence": 0.81,
+      "missingInformation": [
+        "The accountable owner",
+        "The target completion date",
+        "Accountable owner",
+        "Business deadline"
+      ],
+      "suggestedAction": "Clarify the upstream input, downstream owner, and acceptance criteria.",
+      "question": "Which team should own the next campaign execution handoff?",
+      "wrongDecisionRisk": "Changing the handoff without confirming inputs can shift the bottleneck rather than remove it.",
+      "acceptedAnswers": [
+        {
+          "id": "name-handoff",
+          "label": "Name the handoff owner",
+          "concludes": true
+        },
+        {
+          "id": "schedule-review",
+          "label": "Schedule a workflow review",
+          "concludes": true
+        },
+        {
+          "id": "need-context",
+          "label": "Need more context",
+          "concludes": false
+        }
+      ],
+      "state": "open"
+    },
+    {
+      "id": "sig_021c103168d4acf0",
+      "type": "handoff-gap",
+      "headline": "Handoff needs attention · Customer care",
+      "detail": "A cross-team handoff may be blocking progress. 1 supporting observation found.",
+      "observationSummary": "1 task-level observation in customer care are linked to approved-channel evidence.",
+      "interpretation": "The cited customer care fact may indicate a handoff gap in the work system.",
+      "departments": [
+        "Engineering"
+      ],
+      "observationIds": [
+        "obs_198bbcbdfa1b8f29"
+      ],
+      "evidenceIds": [
+        "ev_fe53a680abbdb5eb"
+      ],
+      "weeksObserved": 1,
+      "firstObservedAt": "2026-08-17T16:00:00.000Z",
+      "lastObservedAt": "2026-08-17T16:00:00.000Z",
+      "urgency": "this-week",
+      "confidence": 0.81,
+      "missingInformation": [
+        "The accountable owner",
+        "The target completion date",
+        "Accountable owner",
+        "Business deadline"
+      ],
+      "suggestedAction": "Clarify the upstream input, downstream owner, and acceptance criteria.",
+      "question": "Which team should own the next customer care handoff?",
+      "wrongDecisionRisk": "Changing the handoff without confirming inputs can shift the bottleneck rather than remove it.",
+      "acceptedAnswers": [
+        {
+          "id": "name-handoff",
+          "label": "Name the handoff owner",
+          "concludes": true
+        },
+        {
+          "id": "schedule-review",
+          "label": "Schedule a workflow review",
+          "concludes": true
+        },
+        {
+          "id": "need-context",
+          "label": "Need more context",
+          "concludes": false
+        }
+      ],
+      "state": "open"
+    },
+    {
+      "id": "sig_e655336e6cb59b18",
+      "type": "handoff-gap",
+      "headline": "Handoff needs attention · Inventory and fulfillment",
+      "detail": "A cross-team handoff may be blocking progress. 2 supporting observations found.",
+      "observationSummary": "2 task-level observations in inventory and fulfillment are linked to approved-channel evidence.",
+      "interpretation": "The cited inventory and fulfillment fact may indicate a handoff gap in the work system.",
+      "departments": [
+        "Sales",
+        "Support"
+      ],
+      "observationIds": [
+        "obs_35bb6c7400f4128e",
+        "obs_7e1933c4d09ea54f"
+      ],
+      "evidenceIds": [
+        "ev_dde95ad08db8b81e",
+        "ev_e71996f562a583b6"
+      ],
+      "weeksObserved": 1,
+      "firstObservedAt": "2026-08-17T17:00:00.000Z",
+      "lastObservedAt": "2026-08-18T18:00:00.000Z",
+      "urgency": "this-week",
+      "confidence": 0.81,
+      "missingInformation": [
+        "The accountable owner",
+        "The target completion date",
+        "Accountable owner",
+        "Business deadline"
+      ],
+      "suggestedAction": "Clarify the upstream input, downstream owner, and acceptance criteria.",
+      "question": "Which team should own the next inventory and fulfillment handoff?",
+      "wrongDecisionRisk": "Changing the handoff without confirming inputs can shift the bottleneck rather than remove it.",
+      "acceptedAnswers": [
+        {
+          "id": "name-handoff",
+          "label": "Name the handoff owner",
+          "concludes": true
+        },
+        {
+          "id": "schedule-review",
+          "label": "Schedule a workflow review",
+          "concludes": true
+        },
+        {
+          "id": "need-context",
+          "label": "Need more context",
+          "concludes": false
+        }
+      ],
+      "state": "open"
+    },
+    {
+      "id": "sig_0c8560784102c61d",
+      "type": "ownership-gap",
+      "headline": "Ownership gap · Campaign execution",
+      "detail": "A task has no clearly stated owner. 1 supporting observation found.",
+      "observationSummary": "1 task-level observation in campaign execution are linked to approved-channel evidence.",
+      "interpretation": "The cited campaign execution fact may indicate a ownership gap in the work system.",
+      "departments": [
+        "Marketing"
+      ],
+      "observationIds": [
+        "obs_53c1ed9f47c6b63a"
+      ],
+      "evidenceIds": [
+        "ev_0399f135fa87c923"
+      ],
+      "weeksObserved": 1,
+      "firstObservedAt": "2026-08-18T13:00:00.000Z",
+      "lastObservedAt": "2026-08-18T13:00:00.000Z",
+      "urgency": "this-week",
+      "confidence": 0.81,
+      "missingInformation": [
+        "The accountable owner",
+        "The target completion date",
+        "Accountable owner",
+        "Business deadline"
+      ],
+      "suggestedAction": "Assign one accountable owner and define the next handoff.",
+      "question": "Who should own the campaign execution work?",
+      "wrongDecisionRisk": "Assigning the wrong owner can create another handoff; leaving it open can allow the task to age without accountability.",
+      "acceptedAnswers": [
+        {
+          "id": "assign-owner",
+          "label": "Assign an owner",
+          "concludes": true
+        },
+        {
+          "id": "define-scope",
+          "label": "Define the scope first",
+          "concludes": false
+        },
+        {
+          "id": "monitor",
+          "label": "Monitor this week",
+          "concludes": true
+        }
+      ],
+      "state": "open"
+    },
+    {
+      "id": "sig_b05671b2a4f3b91a",
+      "type": "ownership-gap",
+      "headline": "Ownership gap · Inventory and fulfillment",
+      "detail": "A task has no clearly stated owner. 1 supporting observation found.",
+      "observationSummary": "1 task-level observation in inventory and fulfillment are linked to approved-channel evidence.",
+      "interpretation": "The cited inventory and fulfillment fact may indicate a ownership gap in the work system.",
+      "departments": [
+        "Sales"
+      ],
+      "observationIds": [
+        "obs_a98ddcb4a3e2afd5"
+      ],
+      "evidenceIds": [
+        "ev_dde95ad08db8b81e"
+      ],
+      "weeksObserved": 1,
+      "firstObservedAt": "2026-08-17T17:00:00.000Z",
+      "lastObservedAt": "2026-08-17T17:00:00.000Z",
+      "urgency": "this-week",
+      "confidence": 0.81,
+      "missingInformation": [
+        "The accountable owner",
+        "The target completion date",
+        "Accountable owner",
+        "Business deadline"
+      ],
+      "suggestedAction": "Assign one accountable owner and define the next handoff.",
+      "question": "Who should own the inventory and fulfillment work?",
+      "wrongDecisionRisk": "Assigning the wrong owner can create another handoff; leaving it open can allow the task to age without accountability.",
+      "acceptedAnswers": [
+        {
+          "id": "assign-owner",
+          "label": "Assign an owner",
+          "concludes": true
+        },
+        {
+          "id": "define-scope",
+          "label": "Define the scope first",
+          "concludes": false
+        },
+        {
+          "id": "monitor",
+          "label": "Monitor this week",
+          "concludes": true
+        }
+      ],
+      "state": "open"
+    }
+  ],
+  "capacitySignals": [
+    {
+      "id": "cap_abaaa7cf7994763b",
+      "taskArea": "Reporting and reconciliation",
+      "departments": [
+        "Marketing",
+        "Engineering",
+        "Sales",
+        "Support"
+      ],
+      "headline": "Sustained capacity pattern · Reporting and reconciliation",
+      "evidenceIds": [
+        "ev_dd7b2509b6bab1b2",
+        "ev_73254618b0b87450",
+        "ev_a9ac48e337dc573b",
+        "ev_9735b76a15f30e35"
+      ],
+      "observationIds": [
+        "obs_0dd74cba2278b613",
+        "obs_ab64bd48ec525432",
+        "obs_e38ba35eb1c0a679",
+        "obs_2f69a8fe12293a5b"
+      ],
+      "weeksObserved": 4,
+      "occurrenceCount": 4,
+      "operationalImpact": "4 task-level observations appeared across 4 weeks and may be constraining flow.",
+      "temporarySpikeAssessment": "The pattern spans multiple weeks, so it should be reviewed before treating it as a temporary spike.",
+      "interventions": [
+        "Clarify ownership",
+        "Improve the process or SOP",
+        "Automate or add tooling",
+        "Rebalance responsibilities",
+        "Add temporary capacity",
+        "Explore a role hypothesis"
+      ],
+      "roleHypothesis": "After process, automation, and rebalancing options are reviewed, explore whether sustained reporting and reconciliation ownership warrants a role hypothesis.",
+      "confidence": 0.85,
+      "status": "review"
+    }
+  ],
+  "peopleMoments": [
+    {
+      "id": "moment_demo_maya_5y",
+      "initials": "MC",
+      "displayName": "Maya Chen",
+      "description": "5-year work anniversary",
+      "dateLabel": "Aug 22",
+      "department": "Marketing",
+      "actionLabel": "Review message",
+      "queueUrl": "/queue/DEMO-MAYA-5Y"
+    },
+    {
+      "id": "moment_demo_jordan_30d",
+      "initials": "JR",
+      "displayName": "Jordan Reed",
+      "description": "30-day new-hire check-in",
+      "dateLabel": "Aug 21",
+      "department": "Support",
+      "actionLabel": "Open check-in",
+      "queueUrl": "/queue/DEMO-JORDAN-30D"
+    }
+  ],
+  "activity": {
+    "weekLabels": [
+      "Jun 29",
+      "Jul 6",
+      "Jul 13",
+      "Jul 20",
+      "Jul 27",
+      "Aug 3",
+      "Aug 10",
+      "Aug 17"
+    ],
+    "series": [
+      {
+        "department": "Engineering",
+        "indexedValues": [
+          0,
+          0,
+          0,
+          0,
+          67,
+          200,
+          67,
+          67
+        ]
+      },
+      {
+        "department": "Marketing",
+        "indexedValues": [
+          0,
+          0,
+          0,
+          75,
+          0,
+          0,
+          75,
+          150
+        ]
+      },
+      {
+        "department": "Sales",
+        "indexedValues": [
+          0,
+          0,
+          0,
+          0,
+          0,
+          100,
+          0,
+          100
+        ]
+      },
+      {
+        "department": "Support",
+        "indexedValues": [
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          133,
+          67
+        ]
+      }
+    ]
+  },
+  "recurringWorkAreas": [
+    {
+      "name": "Reporting and reconciliation",
+      "count": 4,
+      "departments": [
+        "Marketing",
+        "Engineering",
+        "Sales",
+        "Support"
+      ]
+    }
+  ],
+  "evidence": [
+    {
+      "id": "ev_0399f135fa87c923",
+      "department": "Marketing",
+      "channelId": "CMKT01",
+      "channelName": "#marketing",
+      "messageTimestamp": "2026-08-18T13:00:00.000Z",
+      "permalink": "https://acme.slack.com/archives/CMKT01/p202608181300",
+      "boundedSummary": "No owner is listed for the promotion handoff to customer care.",
+      "contentHash": "0e101cadc7ece1517fa76e368682788d4a90a4b46153c31d46b2b449654c8c86",
+      "observedAt": "2026-08-20T20:00:00.000Z"
+    },
+    {
+      "id": "ev_166d1412c9c8c69b",
+      "department": "Support",
+      "channelId": "CSUP01",
+      "channelName": "#support",
+      "messageTimestamp": "2026-08-16T18:00:00.000Z",
+      "permalink": "https://acme.slack.com/archives/CSUP01/p202608161800",
+      "boundedSummary": "Only one person handles marketplace refunds and there is no backup coverage.",
+      "contentHash": "e41ca48f5b8d77d864e7fdf7f779bc814084a7b0416bf9110990d10fa0cc2652",
+      "observedAt": "2026-08-20T20:00:00.000Z"
+    },
+    {
+      "id": "ev_1d2bb03d04c22eb0",
+      "department": "Engineering",
+      "channelId": "CENG01",
+      "channelName": "#engineering",
+      "messageTimestamp": "2026-08-03T15:00:00.000Z",
+      "permalink": "https://acme.slack.com/archives/CENG01/p202608031500",
+      "boundedSummary": "We need a decision on the release window before deployment can continue.",
+      "contentHash": "0ad95e773da7f6d883e0ada300869cfc5bc1005f136a1953b29c349e750e4b15",
+      "observedAt": "2026-08-20T20:00:00.000Z"
+    },
+    {
+      "id": "ev_4c97295aa8e49877",
+      "department": "Marketing",
+      "channelId": "CMKT01",
+      "channelName": "#marketing",
+      "messageTimestamp": "2026-08-12T13:00:00.000Z",
+      "permalink": "https://acme.slack.com/archives/CMKT01/p202608121300",
+      "boundedSummary": "The product launch creative needs approval before the campaign can move.",
+      "contentHash": "8c5bf9197b71c606ddfe5793daa51d4c7db5549c898393deec28aac8e5965277",
+      "observedAt": "2026-08-20T20:00:00.000Z"
+    },
+    {
+      "id": "ev_73254618b0b87450",
+      "department": "Engineering",
+      "channelId": "CENG01",
+      "channelName": "#engineering",
+      "messageTimestamp": "2026-07-27T14:00:00.000Z",
+      "permalink": "https://acme.slack.com/archives/CENG01/p202607271400",
+      "boundedSummary": "The manual weekly release report is recurring every week and needs…",
+      "contentHash": "4518e725c6c9159f1c1edb3b65206eca3aef10f5fec1387a0e03a63fee9738d6",
+      "observedAt": "2026-08-20T20:00:00.000Z"
+    },
+    {
+      "id": "ev_9735b76a15f30e35",
+      "department": "Support",
+      "channelId": "CSUP01",
+      "channelName": "#support",
+      "messageTimestamp": "2026-08-10T18:00:00.000Z",
+      "permalink": "https://acme.slack.com/archives/CSUP01/p202608101800",
+      "boundedSummary": "The customer refund report is repeated again this week and reconciled manually.",
+      "contentHash": "ec00ba2dbf06751c84a2bd934f2353a8cbf57fbd58bdf700aa6e0fb37cc8be27",
+      "observedAt": "2026-08-20T20:00:00.000Z"
+    },
+    {
+      "id": "ev_a9ac48e337dc573b",
+      "department": "Sales",
+      "channelId": "CSALES1",
+      "channelName": "#sales",
+      "messageTimestamp": "2026-08-03T17:00:00.000Z",
+      "permalink": "https://acme.slack.com/archives/CSALES1/p202608031700",
+      "boundedSummary": "The forecast spreadsheet repeats each week and requires manual reconciliation.",
+      "contentHash": "8d90cd316eda584c3a0020f95657725d9a6f84fc21e3cb8e32f23ea395095aab",
+      "observedAt": "2026-08-20T20:00:00.000Z"
+    },
+    {
+      "id": "ev_dd7b2509b6bab1b2",
+      "department": "Marketing",
+      "channelId": "CMKT01",
+      "channelName": "#marketing",
+      "messageTimestamp": "2026-07-20T13:00:00.000Z",
+      "permalink": "https://acme.slack.com/archives/CMKT01/p202607201300",
+      "boundedSummary": "The campaign performance spreadsheet is manual every week and needs…",
+      "contentHash": "c83427494e398c30c7feffd5ea28e1e5ab632f7ac40d9441e11b403bb90cd962",
+      "observedAt": "2026-08-20T20:00:00.000Z"
+    },
+    {
+      "id": "ev_dde95ad08db8b81e",
+      "department": "Sales",
+      "channelId": "CSALES1",
+      "channelName": "#sales",
+      "messageTimestamp": "2026-08-17T17:00:00.000Z",
+      "permalink": "https://acme.slack.com/archives/CSALES1/p202608171700",
+      "boundedSummary": "Who owns the wholesale inventory handoff for this launch?",
+      "contentHash": "b38c78662b1470b1a95115b5bce69f505d3e09a683f733d88d42dbf73eb418bb",
+      "observedAt": "2026-08-20T20:00:00.000Z"
+    },
+    {
+      "id": "ev_e71996f562a583b6",
+      "department": "Support",
+      "channelId": "CSUP01",
+      "channelName": "#support",
+      "messageTimestamp": "2026-08-18T18:00:00.000Z",
+      "permalink": "https://acme.slack.com/archives/CSUP01/p202608181800",
+      "boundedSummary": "The warehouse ticket handoff is waiting on an inventory confirmation.",
+      "contentHash": "df187f18630eb5efb41e3d8972ba61c107784981d94661774cb6b12d7cca0b7f",
+      "observedAt": "2026-08-20T20:00:00.000Z"
+    },
+    {
+      "id": "ev_fe53a680abbdb5eb",
+      "department": "Engineering",
+      "channelId": "CENG01",
+      "channelName": "#engineering",
+      "messageTimestamp": "2026-08-17T16:00:00.000Z",
+      "permalink": "https://acme.slack.com/archives/CENG01/p202608171600",
+      "boundedSummary": "The incident handoff is blocked by the vendor operations response.",
+      "contentHash": "bf72740636d4046ce1405f43ea300b6466047703a8ce044ad0b3a3fbcf6446aa",
+      "observedAt": "2026-08-20T20:00:00.000Z"
+    }
+  ],
+  "audit": {
+    "departments": 4,
+    "channelsRead": 4,
+    "messagesRead": 15,
+    "taskObservations": 13,
+    "signals": 9,
+    "model": "mock-people-pulse-v1",
+    "tokensIn": 0,
+    "tokensOut": 0,
+    "costEstimateUsd": 0,
+    "status": "complete",
+    "errorCode": ""
+  }
+}
