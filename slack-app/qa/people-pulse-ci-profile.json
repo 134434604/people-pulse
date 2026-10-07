@@ -1,0 +1,44 @@
+{
+  "schema": "codex-ci-quality-gate/v1",
+  "requiredTriggers": ["push", "pull_request", "workflow_dispatch"],
+  "safeEnvironment": {
+    "PP_DATA_MODE": "TEST",
+    "PP_SLACK_READ_MODE": "MOCK",
+    "PP_AI_MODE": "MOCK",
+    "PP_CHAT_MODE": "MOCK",
+    "PP_NOTIFY_MODE": "OFF",
+    "DRY_RUN": "true",
+    "ANTHROPIC_API_KEY": "",
+    "SLACK_BOT_TOKEN": "",
+    "SLACK_SIGNING_SECRET": "",
+    "GOOGLE_SERVICE_ACCOUNT_JSON_BASE64": "",
+    "GOOGLE_APPLICATION_CREDENTIALS": ""
+  },
+  "requiredMarkers": [
+    "npm ci",
+    "npm run people-pulse:demo",
+    "npm run check",
+    "npm test -- --run",
+    "npm run qa:people-pulse:contract",
+    "npm run qa:people-pulse:api",
+    "playwright install --with-deps chromium",
+    "npm run qa:people-pulse:browser",
+    "pull_request_head_sha",
+    "sha256sum",
+    "output/playwright"
+  ],
+  "orderedMarkers": [
+    "npm ci",
+    "npm run people-pulse:demo",
+    "npm run check",
+    "npm test -- --run",
+    "npm run qa:people-pulse:contract",
+    "npm run qa:people-pulse:api",
+    "npm run qa:people-pulse:browser",
+    "sha256sum",
+    "actions/upload-artifact@"
+  ],
+  "requireReadOnlyContents": true,
+  "requireExactShaCheckout": true,
+  "requireAlwaysUploadedEvidence": true
+}

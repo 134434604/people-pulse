@@ -1,0 +1,74 @@
+{
+  "weekStart": "2026-08-17",
+  "generatedAt": "2026-08-20T20:00:00.000Z",
+  "scopes": [
+    {
+      "department": "Engineering",
+      "channelId": "CENG01",
+      "channelName": "#engineering",
+      "conversationType": "public_channel",
+      "mappingSource": "manual",
+      "include": true,
+      "approvedBy": "Demo Executive",
+      "approvedDate": "2026-08-01"
+    },
+    {
+      "department": "Marketing",
+      "channelId": "CMKT01",
+      "channelName": "#marketing",
+      "conversationType": "public_channel",
+      "mappingSource": "manual",
+      "include": true,
+      "approvedBy": "Demo Executive",
+      "approvedDate": "2026-08-01"
+    },
+    {
+      "department": "Sales",
+      "channelId": "CSALES1",
+      "channelName": "#sales",
+      "conversationType": "public_channel",
+      "mappingSource": "manual",
+      "include": true,
+      "approvedBy": "Demo Executive",
+      "approvedDate": "2026-08-01"
+    },
+    {
+      "department": "Support",
+      "channelId": "CSUP01",
+      "channelName": "#support",
+      "conversationType": "public_channel",
+      "mappingSource": "manual",
+      "include": true,
+      "approvedBy": "Demo Executive",
+      "approvedDate": "2026-08-01"
+    }
+  ],
+  "headcount": {
+    "Engineering": 6,
+    "Marketing": 5,
+    "Sales": 4,
+    "Support": 5
+  },
+  "peopleMoments": [
+    {
+      "id": "moment_demo_maya_5y",
+      "initials": "MC",
+      "displayName": "Maya Chen",
+      "description": "5-year work anniversary",
+      "dateLabel": "Aug 22",
+      "department": "Marketing",
+      "actionLabel": "Review message",
+      "queueUrl": "/queue/DEMO-MAYA-5Y"
+    },
+    {
+      "id": "moment_demo_jordan_30d",
+      "initials": "JR",
+      "displayName": "Jordan Reed",
+      "description": "30-day new-hire check-in",
+      "dateLabel": "Aug 21",
+      "department": "Support",
+      "actionLabel": "Open check-in",
+      "queueUrl": "/queue/DEMO-JORDAN-30D"
+    }
+  ]
+}

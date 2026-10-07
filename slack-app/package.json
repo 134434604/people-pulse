@@ -1,0 +1,45 @@
+{
+  "name": "hr-moments-slack-assistant",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "engines": { "node": ">=22" },
+  "scripts": {
+    "build": "tsc -p tsconfig.json",
+    "check": "tsc -p tsconfig.json --noEmit",
+    "dev": "tsx watch src/index.ts",
+    "start": "node dist/index.js",
+    "weekly": "tsx src/run-weekly.ts",
+    "weekly:built": "node dist/run-weekly.js",
+    "bootstrap:sheet": "tsx src/bootstrap-sheet.ts",
+    "prepeople-pulse:demo": "npm run build",
+    "people-pulse:demo": "node dist/peoplePulse/demo.js",
+    "prepeople-pulse:serve": "npm run build",
+    "people-pulse:serve": "node dist/peoplePulse/server.js",
+    "people-pulse:serve:watch": "tsx watch src/peoplePulse/server.ts",
+    "people-pulse:serve:cloud": "node dist/peoplePulse/cloudRun.js",
+    "preqa:people-pulse:contract": "npm run build",
+    "qa:people-pulse:contract": "node qa/people-pulse-contract.mjs",
+    "qa:people-pulse:api": "vitest run test/peoplePulse/server.test.ts test/peoplePulse/serverEdgeCases.test.ts",
+    "qa:people-pulse:deployment": "node qa/people-pulse-deployment.mjs",
+    "preqa:people-pulse:browser": "npm run build",
+    "qa:people-pulse:browser": "node qa/people-pulse-browser.mjs",
+    "qa:people-pulse": "node qa/people-pulse-all.mjs",
+    "test": "vitest run",
+    "test:watch": "vitest"
+  },
+  "dependencies": {
+    "@slack/bolt": "^5.0.0",
+    "@slack/web-api": "^8.0.0",
+    "dotenv": "^17.4.2",
+    "google-auth-library": "10.9.0",
+    "googleapis": "^173.0.0",
+    "zod": "^4.4.3"
+  },
+  "devDependencies": {
+    "@types/node": "^26.1.1",
+    "tsx": "^4.23.1",
+    "typescript": "^7.0.2",
+    "vitest": "^4.1.10"
+  }
+}

@@ -1,0 +1,192 @@
+{
+  "channels": {
+    "CENG01": {
+      "historyPages": [
+        {
+          "messages": [
+            {
+              "channelId": "CENG01",
+              "timestamp": "2026-07-27T14:00:00.000Z",
+              "userId": "UENG0001",
+              "text": "The manual weekly release report is recurring every week and needs reconciliation.",
+              "replyCount": 0,
+              "permalink": "https://acme.slack.com/archives/CENG01/p202607271400"
+            },
+            {
+              "channelId": "CENG01",
+              "timestamp": "2026-08-03T15:00:00.000Z",
+              "userId": "UENG0002",
+              "text": "We need a decision on the release window before deployment can continue.",
+              "replyCount": 3,
+              "lastReplyAt": "2026-08-10T14:00:00.000Z",
+              "permalink": "https://acme.slack.com/archives/CENG01/p202608031500"
+            }
+          ],
+          "nextCursor": "1"
+        },
+        {
+          "messages": [
+            {
+              "channelId": "CENG01",
+              "timestamp": "2026-08-17T16:00:00.000Z",
+              "userId": "UENG0003",
+              "text": "The incident handoff is blocked by the vendor operations response.",
+              "replyCount": 0,
+              "permalink": "https://acme.slack.com/archives/CENG01/p202608171600"
+            },
+            {
+              "channelId": "CENG01",
+              "timestamp": "2026-08-18T16:30:00.000Z",
+              "text": "automated bot update",
+              "replyCount": 0,
+              "botId": "B0000001",
+              "permalink": "https://acme.slack.com/archives/CENG01/p202608181630"
+            }
+          ]
+        }
+      ],
+      "replyPages": {
+        "2026-08-03T15:00:00.000Z": [
+          {
+            "messages": [
+              {
+                "channelId": "CENG01",
+                "timestamp": "2026-08-03T15:00:00.000Z",
+                "userId": "UENG0002",
+                "text": "We need a decision on the release window before deployment can continue.",
+                "replyCount": 3,
+                "permalink": "https://acme.slack.com/archives/CENG01/p202608031500"
+              },
+              {
+                "channelId": "CENG01",
+                "timestamp": "2026-08-04T12:00:00.000Z",
+                "threadTimestamp": "2026-08-03T15:00:00.000Z",
+                "userId": "UENG0001",
+                "text": "Release checklist is ready.",
+                "replyCount": 0,
+                "permalink": "https://acme.slack.com/archives/CENG01/p202608041200"
+              },
+              {
+                "channelId": "CENG01",
+                "timestamp": "2026-08-07T12:00:00.000Z",
+                "threadTimestamp": "2026-08-03T15:00:00.000Z",
+                "userId": "UENG0003",
+                "text": "Still awaiting the final option.",
+                "replyCount": 0,
+                "permalink": "https://acme.slack.com/archives/CENG01/p202608071200"
+              },
+              {
+                "channelId": "CENG01",
+                "timestamp": "2026-08-10T14:00:00.000Z",
+                "threadTimestamp": "2026-08-03T15:00:00.000Z",
+                "userId": "UENG0002",
+                "text": "No decision recorded yet.",
+                "replyCount": 0,
+                "permalink": "https://acme.slack.com/archives/CENG01/p202608101400"
+              }
+            ]
+          }
+        ]
+      }
+    },
+    "CMKT01": {
+      "historyPages": [
+        {
+          "messages": [
+            {
+              "channelId": "CMKT01",
+              "timestamp": "2026-07-20T13:00:00.000Z",
+              "userId": "UMKT0001",
+              "text": "The campaign performance spreadsheet is manual every week and needs reconciliation.",
+              "replyCount": 0,
+              "permalink": "https://acme.slack.com/archives/CMKT01/p202607201300"
+            },
+            {
+              "channelId": "CMKT01",
+              "timestamp": "2026-08-12T13:00:00.000Z",
+              "userId": "UMKT0002",
+              "text": "The product launch creative needs approval before the campaign can move.",
+              "replyCount": 0,
+              "permalink": "https://acme.slack.com/archives/CMKT01/p202608121300"
+            },
+            {
+              "channelId": "CMKT01",
+              "timestamp": "2026-08-18T13:00:00.000Z",
+              "userId": "UMKT0003",
+              "text": "No owner is listed for the promotion handoff to customer care.",
+              "replyCount": 0,
+              "permalink": "https://acme.slack.com/archives/CMKT01/p202608181300"
+            },
+            {
+              "channelId": "CMKT01",
+              "timestamp": "2026-08-19T13:00:00.000Z",
+              "userId": "UMKT0001",
+              "text": "Thanks everyone for the lunch recommendations and welcome messages.",
+              "replyCount": 0,
+              "permalink": "https://acme.slack.com/archives/CMKT01/p202608191300"
+            }
+          ]
+        }
+      ],
+      "replyPages": {}
+    },
+    "CSALES1": {
+      "historyPages": [
+        {
+          "messages": [
+            {
+              "channelId": "CSALES1",
+              "timestamp": "2026-08-03T17:00:00.000Z",
+              "userId": "USAL0001",
+              "text": "The forecast spreadsheet repeats each week and requires manual reconciliation.",
+              "replyCount": 0,
+              "permalink": "https://acme.slack.com/archives/CSALES1/p202608031700"
+            },
+            {
+              "channelId": "CSALES1",
+              "timestamp": "2026-08-17T17:00:00.000Z",
+              "userId": "USAL0002",
+              "text": "Who owns the wholesale inventory handoff for this launch?",
+              "replyCount": 0,
+              "permalink": "https://acme.slack.com/archives/CSALES1/p202608171700"
+            }
+          ]
+        }
+      ],
+      "replyPages": {}
+    },
+    "CSUP01": {
+      "historyPages": [
+        {
+          "messages": [
+            {
+              "channelId": "CSUP01",
+              "timestamp": "2026-08-10T18:00:00.000Z",
+              "userId": "USUP0001",
+              "text": "The customer refund report is repeated again this week and reconciled manually.",
+              "replyCount": 0,
+              "permalink": "https://acme.slack.com/archives/CSUP01/p202608101800"
+            },
+            {
+              "channelId": "CSUP01",
+              "timestamp": "2026-08-16T18:00:00.000Z",
+              "userId": "USUP0002",
+              "text": "Only one person handles marketplace refunds and there is no backup coverage.",
+              "replyCount": 0,
+              "permalink": "https://acme.slack.com/archives/CSUP01/p202608161800"
+            },
+            {
+              "channelId": "CSUP01",
+              "timestamp": "2026-08-18T18:00:00.000Z",
+              "userId": "USUP0003",
+              "text": "The warehouse ticket handoff is waiting on an inventory confirmation.",
+              "replyCount": 0,
+              "permalink": "https://acme.slack.com/archives/CSUP01/p202608181800"
+            }
+          ]
+        }
+      ],
+      "replyPages": {}
+    }
+  }
+}

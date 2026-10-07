@@ -1,0 +1,21 @@
+display_information:
+  name: HR Moments Assistant
+  description: Private HR review and approved work-anniversary posts
+  background_color: "#4A154B"
+features:
+  bot_user:
+    display_name: HR Moments Assistant
+    always_online: false
+oauth_config:
+  scopes:
+    bot:
+      - chat:write
+      - channels:history
+      - groups:history
+settings:
+  interactivity:
+    is_enabled: true
+    request_url: https://REPLACE_WITH_APPROVED_HOST/slack/events
+  org_deploy_enabled: false
+  socket_mode_enabled: false
+  token_rotation_enabled: false
